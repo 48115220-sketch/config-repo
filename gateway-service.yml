@@ -15,17 +15,22 @@ spring:
             allowedHeaders: "*"
             allowCredentials: true
       routes:
-        - id: admin-service
+        - id: admin-auth-route
           uri: http://localhost:8083
           predicates:
-            - Path=/auth/**, /admin/**
+            - Path=/auth/**
 
-        - id: alumno-service
+        - id: admin-service-route
+          uri: http://localhost:8083
+          predicates:
+            - Path=/admin/**
+
+        - id: alumno-service-route
           uri: http://localhost:8081
           predicates:
             - Path=/alumnos/**
 
-        - id: curso-service
+        - id: curso-service-route
           uri: http://localhost:8082
           predicates:
             - Path=/cursos/**
