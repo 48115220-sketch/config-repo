@@ -22,9 +22,6 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 
-jwt:
-  secret: ClaveSecretaSuperSeguraParaEscuelaMicroserviciosPDTprofeAPROBAME
-
 management:
   endpoints:
     web:
