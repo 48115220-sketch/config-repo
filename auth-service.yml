@@ -1,6 +1,3 @@
-jwt:
-  secret: ClaveSecretaSuperSeguraParaEscuelaMicroserviciosPDTprofeAPROBAME
-
 server:
   port: 8084
 
