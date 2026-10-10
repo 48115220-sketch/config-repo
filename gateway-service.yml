@@ -12,35 +12,35 @@ spring:
         add-to-config-source: true
         cors-configurations:
           '[/**]':
-            allowedOrigins: "http://localhost:4200"
+            allowedOriginPatterns: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
             allowCredentials: true
       routes:
         - id: auth-service
-          uri: http://localhost:8084
+          uri: lb://AUTH-SERVICE
           predicates:
             - Path=/auth/**
 
         - id: admin-service
-          uri: http://localhost:8083
+          uri: lb://ADMIN-SERVICE
           predicates:
             - Path=/auth-admin/**, /admin/**
 
         - id: alumno-service
-          uri: http://localhost:8081
+          uri: lb://ALUMNO-SERVICE
           predicates:
             - Path=/alumnos/**
 
         - id: curso-service
-          uri: http://localhost:8082
+          uri: lb://CURSO-SERVICE
           predicates:
             - Path=/cursos/**
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
 
