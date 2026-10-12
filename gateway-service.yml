@@ -6,16 +6,18 @@ spring:
     name: gateway-service
   cloud:
     gateway:
-      default-filters:
-        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
       globalcors:
-        add-to-config-source: true
+        add-to-simple-url-handler-mapping: true
         cors-configurations:
           '[/**]':
-            allowedOriginPatterns: "*"
-            allowedMethods: "*"
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
             allowedHeaders: "*"
-            allowCredentials: true
       routes:
         - id: auth-service
           uri: lb://AUTH-SERVICE
@@ -25,7 +27,7 @@ spring:
         - id: admin-service
           uri: lb://ADMIN-SERVICE
           predicates:
-            - Path=/auth-admin/**, /admin/**
+            - Path=/admin/**
 
         - id: alumno-service
           uri: lb://ALUMNO-SERVICE
@@ -41,14 +43,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka-server:8761/eureka/
-    register-with-eureka: true
-    fetch-registry: true
 
 management:
   endpoints:
     web:
       exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
+        include: health,info,gateway
