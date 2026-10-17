@@ -5,12 +5,12 @@ spring:
   application:
     name: curso-service
   datasource:
-    url: jdbc:mysql://mysqldb:3306/cursodb?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: rootpassword
+    url: jdbc:h2:mem:cursodb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
 
