@@ -6,6 +6,8 @@ spring:
     name: gateway-service
   cloud:
     gateway:
+      x-forwarded:
+        prefix-enabled: false
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
       routes:
@@ -14,8 +16,7 @@ spring:
           predicates:
             - Path=/auth/v3/api-docs
           filters:
-            - StripPrefix=1
-            - RemoveRequestHeader=X-Forwarded-Prefix
+            - SetPath=/v3/api-docs
           order: -1
 
         - id: admin-v3-docs
@@ -23,8 +24,7 @@ spring:
           predicates:
             - Path=/admin/v3/api-docs
           filters:
-            - StripPrefix=1
-            - RemoveRequestHeader=X-Forwarded-Prefix
+            - SetPath=/v3/api-docs
           order: -1
 
         - id: alumno-v3-docs
@@ -32,8 +32,7 @@ spring:
           predicates:
             - Path=/alumnos/v3/api-docs
           filters:
-            - StripPrefix=1
-            - RemoveRequestHeader=X-Forwarded-Prefix
+            - SetPath=/v3/api-docs
           order: -1
 
         - id: curso-v3-docs
@@ -41,8 +40,7 @@ spring:
           predicates:
             - Path=/cursos/v3/api-docs
           filters:
-            - StripPrefix=1
-            - RemoveRequestHeader=X-Forwarded-Prefix
+            - SetPath=/v3/api-docs
           order: -1
 
         - id: auth-service
