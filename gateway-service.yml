@@ -15,6 +15,7 @@ spring:
             - Path=/auth/v3/api-docs
           filters:
             - StripPrefix=1
+            - RemoveRequestHeader=X-Forwarded-Prefix
           order: -1
 
         - id: admin-v3-docs
@@ -23,6 +24,7 @@ spring:
             - Path=/admin/v3/api-docs
           filters:
             - StripPrefix=1
+            - RemoveRequestHeader=X-Forwarded-Prefix
           order: -1
 
         - id: alumno-v3-docs
@@ -31,6 +33,7 @@ spring:
             - Path=/alumnos/v3/api-docs
           filters:
             - StripPrefix=1
+            - RemoveRequestHeader=X-Forwarded-Prefix
           order: -1
 
         - id: curso-v3-docs
@@ -39,6 +42,7 @@ spring:
             - Path=/cursos/v3/api-docs
           filters:
             - StripPrefix=1
+            - RemoveRequestHeader=X-Forwarded-Prefix
           order: -1
 
         - id: auth-service
