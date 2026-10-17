@@ -15,6 +15,7 @@ spring:
             - Path=/auth/v3/api-docs
           filters:
             - RewritePath=/auth/v3/api-docs, /v3/api-docs
+          order: -1
 
         - id: admin-v3-docs
           uri: lb://ADMIN-SERVICE
@@ -22,6 +23,7 @@ spring:
             - Path=/admin/v3/api-docs
           filters:
             - RewritePath=/admin/v3/api-docs, /v3/api-docs
+          order: -1
 
         - id: alumno-v3-docs
           uri: lb://ALUMNO-SERVICE
@@ -29,6 +31,7 @@ spring:
             - Path=/alumnos/v3/api-docs
           filters:
             - RewritePath=/alumnos/v3/api-docs, /v3/api-docs
+          order: -1
 
         - id: curso-v3-docs
           uri: lb://CURSO-SERVICE
@@ -36,6 +39,7 @@ spring:
             - Path=/cursos/v3/api-docs
           filters:
             - RewritePath=/cursos/v3/api-docs, /v3/api-docs
+          order: -1
 
         - id: auth-service
           uri: lb://AUTH-SERVICE
