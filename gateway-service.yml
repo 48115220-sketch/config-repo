@@ -14,56 +14,48 @@ spring:
           predicates:
             - Path=/auth/v3/api-docs
           filters:
-            - SetPath=/v3/api-docs
-          order: 1
+            - RewritePath=/auth/v3/api-docs, /v3/api-docs
 
         - id: admin-v3-docs
           uri: lb://ADMIN-SERVICE
           predicates:
             - Path=/admin/v3/api-docs
           filters:
-            - SetPath=/v3/api-docs
-          order: 1
+            - RewritePath=/admin/v3/api-docs, /v3/api-docs
 
         - id: alumno-v3-docs
           uri: lb://ALUMNO-SERVICE
           predicates:
             - Path=/alumnos/v3/api-docs
           filters:
-            - SetPath=/v3/api-docs
-          order: 1
+            - RewritePath=/alumnos/v3/api-docs, /v3/api-docs
 
         - id: curso-v3-docs
           uri: lb://CURSO-SERVICE
           predicates:
             - Path=/cursos/v3/api-docs
           filters:
-            - SetPath=/v3/api-docs
-          order: 1
+            - RewritePath=/cursos/v3/api-docs, /v3/api-docs
 
         - id: auth-service
           uri: lb://AUTH-SERVICE
           predicates:
             - Path=/auth/**
-          order: 10
 
         - id: admin-service
           uri: lb://ADMIN-SERVICE
           predicates:
             - Path=/auth-admin/**, /admin/**
-          order: 10
 
         - id: alumno-service
           uri: lb://ALUMNO-SERVICE
           predicates:
             - Path=/alumnos/**
-          order: 10
 
         - id: curso-service
           uri: lb://CURSO-SERVICE
           predicates:
             - Path=/cursos/**
-          order: 10
 
 eureka:
   client:
