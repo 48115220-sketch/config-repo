@@ -30,3 +30,7 @@ management:
   info:
     env:
       enabled: true
+      
+springdoc:
+  api-docs:
+    path: /admin/v3/api-docs
