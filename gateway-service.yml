@@ -9,26 +9,6 @@ spring:
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
       routes:
-        - id: auth-service
-          uri: lb://AUTH-SERVICE
-          predicates:
-            - Path=/auth/**
-
-        - id: admin-service
-          uri: lb://ADMIN-SERVICE
-          predicates:
-            - Path=/auth-admin/**, /admin/**
-
-        - id: alumno-service
-          uri: lb://ALUMNO-SERVICE
-          predicates:
-            - Path=/alumnos/**
-
-        - id: curso-service
-          uri: lb://CURSO-SERVICE
-          predicates:
-            - Path=/cursos/**
-
         - id: auth-v3-docs
           uri: lb://AUTH-SERVICE
           predicates:
@@ -57,6 +37,26 @@ spring:
           filters:
             - SetPath=/v3/api-docs
 
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+
+        - id: admin-service
+          uri: lb://ADMIN-SERVICE
+          predicates:
+            - Path=/auth-admin/**, /admin/**
+
+        - id: alumno-service
+          uri: lb://ALUMNO-SERVICE
+          predicates:
+            - Path=/alumnos/**
+
+        - id: curso-service
+          uri: lb://CURSO-SERVICE
+          predicates:
+            - Path=/cursos/**
+
 eureka:
   client:
     service-url:
@@ -78,11 +78,11 @@ springdoc:
     enabled: true
     path: /swagger-ui.html
     urls:
-      - name: 1. Autenticación (auth-service)
-        url: /auth/v3/api-docs
-      - name: 2. Administración (admin-service)
-        url: /admin/v3/api-docs
-      - name: 3. Alumnos (alumno-service)
-        url: /alumnos/v3/api-docs
-      - name: 4. Cursos (curso-service)
-        url: /cursos/v3/api-docs
+      - name: "1. Autenticación (auth-service)"
+        url: "/auth/v3/api-docs"
+      - name: "2. Administración (admin-service)"
+        url: "/admin/v3/api-docs"
+      - name: "3. Alumnos (alumno-service)"
+        url: "/alumnos/v3/api-docs"
+      - name: "4. Cursos (curso-service)"
+        url: "/cursos/v3/api-docs"
