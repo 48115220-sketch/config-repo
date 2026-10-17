@@ -10,57 +10,57 @@ spring:
         - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
       routes:
         - id: auth-v3-docs
-          uri: http://auth-service:8084
+          uri: lb://AUTH-SERVICE
           predicates:
             - Path=/auth/v3/api-docs
           filters:
-            - SetPath=/v3/api-docs
+            - StripPrefix=1
           order: -1
 
         - id: admin-v3-docs
-          uri: http://admin-service:8083
+          uri: lb://ADMIN-SERVICE
           predicates:
             - Path=/admin/v3/api-docs
           filters:
-            - SetPath=/v3/api-docs
+            - StripPrefix=1
           order: -1
 
         - id: alumno-v3-docs
-          uri: http://alumno-service:8081
+          uri: lb://ALUMNO-SERVICE
           predicates:
             - Path=/alumnos/v3/api-docs
           filters:
-            - SetPath=/v3/api-docs
+            - StripPrefix=1
           order: -1
 
         - id: curso-v3-docs
-          uri: http://curso-service:8082
+          uri: lb://CURSO-SERVICE
           predicates:
             - Path=/cursos/v3/api-docs
           filters:
-            - SetPath=/v3/api-docs
+            - StripPrefix=1
           order: -1
 
         - id: auth-service
-          uri: http://auth-service:8084
+          uri: lb://AUTH-SERVICE
           predicates:
             - Path=/auth/**
           order: 10
 
         - id: admin-service
-          uri: http://admin-service:8083
+          uri: lb://ADMIN-SERVICE
           predicates:
             - Path=/auth-admin/**, /admin/**
           order: 10
 
         - id: alumno-service
-          uri: http://alumno-service:8081
+          uri: lb://ALUMNO-SERVICE
           predicates:
             - Path=/alumnos/**
           order: 10
 
         - id: curso-service
-          uri: http://curso-service:8082
+          uri: lb://CURSO-SERVICE
           predicates:
             - Path=/cursos/**
           order: 10
