@@ -6,43 +6,9 @@ spring:
     name: gateway-service
   cloud:
     gateway:
-      x-forwarded:
-        prefix-enabled: false
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
       routes:
-        - id: auth-v3-docs
-          uri: lb://AUTH-SERVICE
-          predicates:
-            - Path=/auth/v3/api-docs
-          filters:
-            - SetPath=/v3/api-docs
-          order: -1
-
-        - id: admin-v3-docs
-          uri: lb://ADMIN-SERVICE
-          predicates:
-            - Path=/admin/v3/api-docs
-          filters:
-            - SetPath=/v3/api-docs
-          order: -1
-
-        - id: alumno-v3-docs
-          uri: lb://ALUMNO-SERVICE
-          predicates:
-            - Path=/alumnos/v3/api-docs
-          filters:
-            - SetPath=/v3/api-docs
-          order: -1
-
-        - id: curso-v3-docs
-          uri: lb://CURSO-SERVICE
-          predicates:
-            - Path=/cursos/v3/api-docs
-          filters:
-            - SetPath=/v3/api-docs
-          order: -1
-
         - id: auth-service
           uri: lb://AUTH-SERVICE
           predicates:
@@ -71,15 +37,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka-server:8761/eureka/
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
 
 springdoc:
   api-docs:
