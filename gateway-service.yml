@@ -6,6 +6,8 @@ spring:
     name: gateway-service
   cloud:
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
       routes:
         - id: auth-service
           uri: lb://AUTH-SERVICE
@@ -15,7 +17,7 @@ spring:
         - id: admin-service
           uri: lb://ADMIN-SERVICE
           predicates:
-            - Path=/admin/**
+            - Path=/admin/**, /auth-admin/**
 
         - id: alumno-service
           uri: lb://ALUMNO-SERVICE
@@ -32,8 +34,18 @@ eureka:
     service-url:
       defaultZone: http://eureka-server:8761/eureka/
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info,gateway
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    urls:
+      - name: 1. Autenticación (auth-service)
+        url: /auth/v3/api-docs
+      - name: 2. Administración (admin-service)
+        url: /admin/v3/api-docs
+      - name: 3. Alumnos (alumno-service)
+        url: /alumnos/v3/api-docs
+      - name: 4. Cursos (curso-service)
+        url: /cursos/v3/api-docs
